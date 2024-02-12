@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<body>
+    <button id='btn'>GO</button>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/0.3.2/js/sql.js'></script>
+
+    <script>
+        (async () => {
+            const response = await fetch('data.db')
+            const buffer = await response.arrayBuffer()
+            const db = new SQL.Database(new Uint8Array(buffer))
+
+            console.log('Db loaded')
+
+            const btn = document.getElementById('btn')
+
+            btn.addEventListener('click', () => {
+                const query = 'select * from tb'
+                l = console.log(db.exec(query)[0].values)
+            })
+        })()
+    </script>
+
+</body>
+
+</html>
